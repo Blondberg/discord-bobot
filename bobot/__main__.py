@@ -17,7 +17,6 @@ bot = commands.Bot(command_prefix=commands.when_mentioned_or(PREFIX))
 @bot.event
 async def on_ready():
     print('Logged in as {0}'.format(bot.user.name))
-
     print('Currently active on {0} guilds'.format(len(bot.guilds)))
 
 

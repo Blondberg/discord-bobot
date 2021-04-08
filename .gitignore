@@ -1,6 +1,7 @@
 token.txt
 .vscode
 .env
+*apis/data/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
