@@ -21,6 +21,7 @@ async def on_ready():
 
 
 
+
 lol.setup(bot)
 
 bot.run(TOKEN)
