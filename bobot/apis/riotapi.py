@@ -30,6 +30,7 @@ def get_champions():
             champions_json = json.load(f)
         return list(champions_json['data'].keys())
     except FileNotFoundError:
+        print('Fetching champions...')
         fetch_data()
         return get_champions()
 
