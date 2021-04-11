@@ -5,22 +5,24 @@ from dotenv import load_dotenv
 
 from .core import decorators
 from .cogs import leagueoflegends as lol
+from .cogs import utils
 
 load_dotenv()
 
-TOKEN = os.getenv('DISCORD_TOKEN')
-PREFIX = os.getenv('BOT_PREFIX')
-CHANNEL_NAME = os.getenv('CHANNEL_NAME')
+TOKEN = os.getenv("DISCORD_TOKEN")
+PREFIX = os.getenv("BOT_PREFIX")
+CHANNEL_NAME = os.getenv("CHANNEL_NAME")
 
 bot = commands.Bot(command_prefix=commands.when_mentioned_or(PREFIX))
 
+
 @bot.event
 async def on_ready():
-    print('Logged in as {0}'.format(bot.user.name))
-    print('Currently active on {0} guilds'.format(len(bot.guilds)))
+    print("Logged in as {0}".format(bot.user.name))
+    print("Currently active on {0} guilds".format(len(bot.guilds)))
 
 
-
+utils.setup(bot)
 
 lol.setup(bot)
 

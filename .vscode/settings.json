@@ -3,5 +3,6 @@
     "python.linting.pylintEnabled": false,
     "python.linting.flake8Enabled": false,
     "python.pythonPath": ".venv\\Scripts\\python.exe",
-    "python.linting.banditEnabled": true
+    "python.linting.banditEnabled": true,
+    "python.formatting.provider": "black"
 }

@@ -2,6 +2,7 @@ token.txt
 .vscode
 .env
 *apis/data/
+activate.sh
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
