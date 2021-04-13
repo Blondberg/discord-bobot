@@ -5,7 +5,9 @@ from dotenv import load_dotenv
 
 from .core import decorators
 from .cogs import leagueoflegends as lol
-from .cogs import utils
+from .cogs import voice
+from .core import messageformatter
+from .cogs import random
 
 load_dotenv()
 
@@ -18,15 +20,17 @@ bot = commands.Bot(command_prefix=commands.when_mentioned_or(PREFIX))
 
 @bot.event
 async def on_ready():
-    print("Logged in as {0}".format(bot.user.name))
-    print("Currently active on {0} guilds".format(len(bot.guilds)))
+    print("I am ready!")
 
 
-utils.setup(bot)
+voice.setup(bot)
+
+random.setup(bot)
 
 lol.setup(bot)
 
 bot.run(TOKEN)
+
 
 """
 @bot.event

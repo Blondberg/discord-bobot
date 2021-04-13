@@ -29,9 +29,6 @@ class League(commands.Cog, name="League of Legends"):
 
         await ctx.send(mf.format(response))
 
-        if voice == None:
-            return
-
         speech = gTTS(text=response, lang="en", slow=False)
         speech.save("./temp.mp3")
 

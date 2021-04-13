@@ -2,7 +2,7 @@ from discord.ext import commands
 from ..core import messageformatter as mf
 
 
-class Utils(commands.Cog, name="Utils"):
+class Voice(commands.Cog, name="Voice"):
     def __init__(self, bot):
         self.bot = bot
 
@@ -20,4 +20,4 @@ class Utils(commands.Cog, name="Utils"):
 
 
 def setup(bot: commands.Bot):
-    bot.add_cog(Utils(bot))
+    bot.add_cog(Voice(bot))
