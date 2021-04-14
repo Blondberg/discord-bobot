@@ -1,6 +1,7 @@
 import os
 import discord
 from discord.ext import commands
+from discord.flags import Intents
 from dotenv import load_dotenv
 
 from .core import decorators
@@ -21,6 +22,19 @@ bot = commands.Bot(command_prefix=commands.when_mentioned_or(PREFIX))
 @bot.event
 async def on_ready():
     print("I am ready!")
+
+
+@bot.event
+async def on_message(message):
+    if len(message.embeds) > 0:
+        if "now playing" in message.embeds[0].title.lower():
+            check_lyrics(message.embeds[0].description)
+
+    await bot.process_commands(message)
+
+
+def check_lyrics(desc):
+    print(desc)
 
 
 voice.setup(bot)

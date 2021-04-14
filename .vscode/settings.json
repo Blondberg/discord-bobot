@@ -1,8 +1,9 @@
 {
     "python.linting.enabled": true,
-    "python.linting.pylintEnabled": false,
+    "python.linting.pylintEnabled": true,
     "python.linting.flake8Enabled": false,
     "python.pythonPath": ".venv\\Scripts\\python.exe",
-    "python.linting.banditEnabled": true,
-    "python.formatting.provider": "black"
+    "python.linting.banditEnabled": false,
+    "python.formatting.provider": "black",
+    "python.linting.pycodestyleEnabled": false
 }
