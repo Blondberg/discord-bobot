@@ -7,14 +7,17 @@ from dotenv import load_dotenv
 from .core import decorators
 from .cogs import leagueoflegends as lol
 from .cogs import voice
-from .core import messageformatter
+from .core import messageformatter as mf
 from .cogs import random
+import lyricsgenius
 
 load_dotenv()
 
 TOKEN = os.getenv("DISCORD_TOKEN")
 PREFIX = os.getenv("BOT_PREFIX")
 CHANNEL_NAME = os.getenv("CHANNEL_NAME")
+GENIUS_TOKEN = os.getenv("GENIUS_TOKEN")
+genius = lyricsgenius.Genius(GENIUS_TOKEN)
 
 bot = commands.Bot(command_prefix=commands.when_mentioned_or(PREFIX))
 
@@ -28,13 +31,29 @@ async def on_ready():
 async def on_message(message):
     if len(message.embeds) > 0:
         if "now playing" in message.embeds[0].title.lower():
-            check_lyrics(message.embeds[0].description)
+            channel = discord.utils.find(
+                lambda c: "lyrics-by-bobot" in c.name, message.guild.channels
+            )
+            await channel.send(check_lyrics(message.embeds[0].description))
 
     await bot.process_commands(message)
 
 
 def check_lyrics(desc):
-    print(desc)
+    try:
+        song_meta = desc[1 : desc.find("](")]
+        song_meta_list = song_meta.split(" - ")
+        song_artist = song_meta_list[0]
+        song_name = song_meta_list[1]
+
+        song = genius.search_song(song_name, song_artist)
+
+        if song.lyrics:
+            return mf.format(song_meta) + "\n" + song.lyrics + "\n"
+    except:
+        return mf.format(
+            "Error: Could not find any lyrics for song: {0}".format(song_meta)
+        )
 
 
 voice.setup(bot)
