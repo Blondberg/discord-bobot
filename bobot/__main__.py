@@ -34,9 +34,16 @@ async def on_message(message):
             channel = discord.utils.find(
                 lambda c: "lyrics-by-bobot" in c.name, message.guild.channels
             )
-            await channel.send(check_lyrics(message.embeds[0].description))
+            lyrics = chunkstring(check_lyrics(message.embeds[0].description))
+
+            for l in lyrics:
+                await channel.send(l)
 
     await bot.process_commands(message)
+
+
+def chunkstring(string, length):
+    return (string[0 + i : length + i] for i in range(0, len(string), length))
 
 
 def check_lyrics(desc):
