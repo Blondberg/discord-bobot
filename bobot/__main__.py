@@ -1,3 +1,4 @@
+from logging import exception
 import os
 import discord
 from discord.ext import commands
@@ -55,8 +56,10 @@ def check_lyrics(desc):
 
         song = genius.search_song(song_name, song_artist)
 
-        if song.lyrics:
+        if song.lyrics and len(song.lyrics) <= 5000:
             return mf.format(song_meta) + "\n" + song.lyrics + "\n"
+        else:
+            raise exception
     except:
         return mf.format(
             "Error: Could not find any lyrics for song: {0}".format(song_meta)
@@ -68,6 +71,7 @@ voice.setup(bot)
 random.setup(bot)
 
 lol.setup(bot)
+
 
 bot.run(TOKEN)
 
