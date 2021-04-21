@@ -3,13 +3,12 @@ import os
 import discord
 from discord.ext import commands
 from discord.flags import Intents
+from discord.gateway import EventListener
 from dotenv import load_dotenv
 
-from .core import decorators
 from .cogs import leagueoflegends as lol
 from .cogs import voice
-from .core import messageformatter as mf
-from .cogs import random
+from .cogs import timer as tim
 
 load_dotenv()
 
@@ -32,7 +31,7 @@ def chunkstring(string, length):
 
 voice.setup(bot)
 
-random.setup(bot)
+tim.setup(bot)
 
 lol.setup(bot)
 
